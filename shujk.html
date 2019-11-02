@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>mySQL数据库</title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+数据库:存储数据的仓库(常用的数据库有:oracle,mysql,sqlserver,Mongodb);	
+数据库执行命令:设置中文-setnames utf8;
+show variables like "character%"; /查找数据库的默认编码格式;
+数据库操作相关sql语句: show databases; /查看mysql有多少个数据库;
+create database 数据库名 charset utf8;  /创建数据库;
+drop database 数据库名 ; /删除数据库;
+use 数据库名; /选择操作哪个数据库;
+
+数据表操作相关sql语句
+create table 表名(字段名 类型,字段名 类型...); /创建;
+数据表 添加字段 creat table user(id int primary key auto_increment not null,name char(30) not null default "小错",sex enum("男","女","未知") default "未知",age tinyint(5) not null default 1) charset utf8;
+show tables; /查看数据库中的数据表    
+desc 表名; /查看表结构
+drop table 表名; /删除数据表
+
+数据操作相关sql语句
+insert into user set name="小张",sex="女",age="21"; /向表中添加数据;
+delete from user where id=4; /删除id=4的数据;
+update user set age="24" where id=1; /更新user表中id=1的age字段
+select*from user where sex='nv'; /查询表中sex=nv的内容;
+select*from user where sex="男"; /查询所有sex="男"的数据;
+
+通过php 操作mySQL
+通过PHP操作MySQL基本步骤:连接mysql-选择数据库-编写sql语句-执行sql语句  获得结果,
+连接数据库$link=mysql_connect('主机名','用户名','密码');
+$link=mysql_connect('','root','')or die("Error-数据库连接失败!");
+if($link){
+echo "OK--数据库连接成功!";	
+}
+mysql_query("set names utf8"); /设置编码
+mysql_query('use 数据库名'); /选择数据库
+$result=mysql_query('sql语句'); /执行sql语句
+$result=mysql_query('select*from users'); /获取select查询语句的结果
+
+获取增删改查语句的结果
+$sql="insert/update/delete..";
+$result=mysql_query($sql);
+$num=mysql_affected_rows();
+if($num>0){
+echo '成功';
+$rows=[];
+	while($row=mysql_fetch_assoc($result)){
+		$rows[]=$row;
+	}
+	print_r($rows);
+	echo
+	json_encode($rows,JSON_UNESCAPED_UNICODE);
+	exit();
+}else{
+	echo '<P>查询失败,无记录!</p>';
+	exit();
+}
+
+</script>

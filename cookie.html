@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<button id="clear">清除</button>
+
+<script>
+// 设置cookie
+document.cookie = 'user1=xiaoming';
+document.cookie = 'user2=xiaowang';
+// 修改cookie
+document.cookie = 'user2=xiaofang';
+
+// 设有效期
+
+
+// 设置cookie函数
+function setCookie(key,val,day){
+    if (day) {
+        var d = new Date();
+        d.setDate(d.getDate() + day);
+        document.cookie = key + '=' + escape(val) + '; expires=' + d;
+    } else {
+        document.cookie = key + '=' + escape(val);
+    }
+}
+setCookie('user4','xiaolv',7);
+setCookie('user6','=&90 %uy$2g',7);
+
+
+
+
+// console.log( document.cookie );
+// 'user1=xiaoming; user3=xiaohong; user4=xiaolv; user2=xiaofang'
+var arr = document.cookie.split('; ');
+console.log(arr);//["user1=xiaoming", "user3=xiaohong", "user4=xiaolv", "user2=xiaofang"]
+
+// 获取user3的值？
+for(var i = 0, len = arr.length; i < len; i++){
+    var arr2 = arr[i].split('=');// ["user1","xiaoming"]
+    if (arr2[0] == 'user3') {
+        console.log(arr2[1]);
+    }
+}
+
+// 获取cookie 
+function getCookie(key){
+    var arr = document.cookie.split('; ');
+    for(var i = 0, len = arr.length; i < len; i++){
+        var arr2 = arr[i].split('=');// ["user1","xiaoming"]
+        if (arr2[0] == key) {
+            return unescape(arr2[1]);
+        }
+    }
+    return null;
+}
+console.log( getCookie('user2') );
+console.log( getCookie('user6') );
+
+
+// 删除cookie
+function removeCookie(key){
+    setCookie(key,'123',-3);
+}
+
+
+// localStorage
+
+// 设置
+localStorage.setItem('username','xiaocuo');
+localStorage.setItem('abc','123123');
+localStorage.setItem('def','aasss');
+// 获取
+console.log( localStorage.getItem('username') );//xiaocuo
+
+// 获取key
+console.log( localStorage.key(0) );//'username'
+console.log( localStorage.key(2) );//'def'
+
+// for(var i = 0, len = localStorage.length; i < len; i++){
+//     console.log( localStorage.getItem(localStorage.key(i)) );
+// }
+
+clear.onclick = function (){
+    // localStorage.clear();//清除所有数据
+    // localStorage.removeItem('abc');//清除某一条数据
+
+    // localStorage.setItem('obj1',{"name":"xm","age":"24"});
+    // console.log( {"name":"xm","age":"24"}.toString() );//'[object Object]'
+
+    // console.log( localStorage.getItem('obj1') );
+
+    // var jsonStr = JSON.stringify({"name":"xm","age":"24"});//'{"name":"xm","age":"24"}'
+    // localStorage.setItem('obj2',jsonStr);
+
+    var json = JSON.parse( localStorage.getItem('obj2') );//{"name":"xm","age":"24"}
+    console.log(json.name);
+
+}
+
+// checkbox.checked
+// checkbox.checked = true;
+
+
+
+
+</script>
+</body>
+</html>

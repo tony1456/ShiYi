@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>
+<link class="link" rel="stylesheet" href="style1.css">
+</head>
+<body>
+
+<div class="wrap">
+<h1>我是王小明</h1>
+</div>
+<div class="box">
+<span>选择主题：</span>
+<select name="" class="sel">
+<option value="-1">选择</option>
+<option value="red">红色</option>
+<option value="blue">蓝色</option>
+<option value="pink">粉色</option>
+</select>
+</div>
+
+
+<script src="tool.js"></script>
+<script>
+var link = document.querySelector('.link');
+var sel = document.querySelector('.sel');
+
+if (getCookie('style')) {
+changeStyle(getCookie('style'));
+}
+
+sel.onchange = function () {
+changeStyle(this.value);
+}
+
+function changeStyle(val) {
+switch(val){
+case 'red':
+link.href = 'style1.css';
+setCookie('style','red',7);
+break;
+case 'blue':
+link.href = 'style2.css';
+setCookie('style','blue',7);
+break;
+case 'pink':
+link.href = 'style3.css';
+setCookie('style','pink',7);
+break;
+}
+}
+
+</script>
+</body>
+</html>

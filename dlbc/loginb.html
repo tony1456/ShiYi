@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+<h1>登录成功！</h1>
+<h1 class="showTime">上次登录时间：2019年5月22日17时22分</h1>
+
+
+<script src="tool.js"></script>
+<script>
+
+var showTime = document.querySelector('.showTime');
+
+if (getCookie('time2')) {
+showTime.innerHTML = '上次登录时间：' + getCookie('time2');
+} else {
+showTime.innerHTML = '您最近一周未登录';
+}
+
+
+
+// 2019年5月22日17时22分
+var d = new Date();
+var now = d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日'+d.getHours()+'时'+d.getMinutes()+'分';
+setCookie('time2',now,7);
+
+</script>
+</body>
+</html>
